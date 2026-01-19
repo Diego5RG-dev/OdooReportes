@@ -1,27 +1,55 @@
 <odoo>
   <data>
-    <record id="action_expense_report" model="ir.actions.report">
-      <field name="name">Reportador</field>
-      <field name="model">hr.expense</field>
+    <record id="action_sale_picking_report" model="ir.actions.report">
+      <field name="name">ReporteDiego</field>
+      <field name="model">sale.order</field>
       <field name="report_type">qweb-pdf</field>
       
-      <field name="report_name">reportearmodulo.report_proba_template</field>
-      <field name="report_file">reportearmodulo.report_proba_template</field>
+      <field name="report_name">reportearmodulo.report_picking_template</field>
+      <field name="report_file">reportearmodulo.report_picking_template</field>
       
-      <field name="binding_model_id" ref="hr_expense.model_hr_expense"/>
+      <field name="binding_model_id" ref="sale.model_sale_order"/>
       <field name="binding_type">report</field>
     </record>
 
-    <template id="report_proba_template">
+    <template id="report_picking_template">
       <t t-call="web.html_container">
         <t t-foreach="docs" t-as="o">
           <t t-call="web.external_layout">
             <div class="page">
-              <h2>Expense Report</h2>
-              <p>Employee: <span t-field="o.employee_id.name"/></p>
-              <p>Date: <span t-field="o.date"/></p>
-              <p>Amount: <span t-field="o.total_amount"/></p>
-              <p>Description: <span t-field="o.description"/></p>
+              
+              <div class="text-center mt-4 mb-4">
+                <h1>Pedido: <span t-field="o.name"/></h1>
+                <p><strong>Cliente:</strong> <span t-field="o.partner_id.name"/></p>
+                <p><strong>Fecha:</strong> <span t-field="o.date_order" t-options='{"widget": "date"}'/></p>
+              </div>
+
+              <table class="table table-sm table-bordered mt-4">
+                <thead>
+                  <tr>
+                    <th style="width: 60%;">Producto</th>
+                    <th style="width: 20%;" class="text-right">Cantidad</th>
+                    <th style="width: 20%;" class="text-center">Comprobación</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <t t-foreach="o.order_line" t-as="line">
+                    <tr t-if="not line.display_type">
+                      <td>
+                        <span t-field="line.name"/>
+                      </td>
+                      <td class="text-right">
+                        <span t-field="line.product_uom_qty"/>
+                        <span t-field="line.product_uom" groups="uom.group_uom"/>
+                      </td>
+                      <td class="text-center">
+                        <div style="border: 1px solid #000; width: 20px; height: 20px; display: inline-block; vertical-align: middle;"></div>
+                      </td>
+                    </tr>
+                  </t>
+                </tbody>
+              </table>
+              
             </div>
           </t>
         </t>
