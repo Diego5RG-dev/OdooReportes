@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <template id="report_saleorder_custom_horario" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//div[hasclass('page')]" position="inside">
+                <div class="row mt-4 text-muted">
+                    <div class="col-12 text-center">
+                        <span t-if="doc.horario" t-field="doc.horario"/>
+                        
+                        <span t-else="">Horario de almacen: Lunes a Viernes de 08:00 a 16:00</span>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

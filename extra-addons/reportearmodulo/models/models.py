@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
-# from odoo import models, fields, api
+from odoo import models, fields, api
 
 
-# class reportearmodulo(models.Model):
+class SaleOrder(models.Model):
+    _inherit = 'sale.order'
+    horario = fields.Char(string='Horario',
+                          default='Horario de almacen: Lunes a Viernes de 08:00 a 16:00')
 #     _name = 'reportearmodulo.reportearmodulo'
 #     _description = 'reportearmodulo.reportearmodulo'
 

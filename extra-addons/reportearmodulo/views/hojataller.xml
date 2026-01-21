@@ -29,7 +29,7 @@
                   <tr>
                     <th style="width: 60%;">Producto</th>
                     <th style="width: 20%;" class="text-right">Cantidad</th>
-                    <th style="width: 20%;" class="text-center">Comprobación</th>
+                    <th style="width: 20%;" class="text-left">Comprobación</th>
                   </tr>
                 </thead>
                 <tbody>
